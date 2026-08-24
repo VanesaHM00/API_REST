@@ -1,0 +1,24 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "Servicios API REST",
+  "keywords": [
+    "Node"
+  ],
+  "license": "ISC",
+  "author": "Vanesa Hincapíe Martínez, Marisol Guarín Escobar, Isabella Sánchez Isaza",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "NodeJS Javascript"
+  },
+  "dependencies": {
+    "body-parser": "^2.3.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "mongoose": "^9.9.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
