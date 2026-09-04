@@ -15,6 +15,10 @@ mongoose.Promise = global.Promise;
 
 //Agregar las rutas
 require('./routes/director.routes.js')(app);
+require('./routes/genero.routes.js')(app);
+require('./routes/productora.routes.js')(app);
+require('./routes/tipo.routes.js')(app);
+require('./routes/media.routes.js')(app);
 //Iniciar la conexión a la base de datos
 mongoose.connect(dbConfig.url).then(() => {
     console.log("Conexión a la base de datos exitosa");

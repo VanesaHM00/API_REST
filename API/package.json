@@ -10,7 +10,8 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "NodeJS Javascript"
+     "start": "node index.js",
+      "dev": "nodemon index.js"
   },
   "dependencies": {
     "body-parser": "^2.3.0",

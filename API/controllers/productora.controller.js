@@ -1,4 +1,4 @@
-const Productora = require('../models/productora.model.js');
+const Productora = require('../app/models/productora.model.js');
 
 // Crear una productora
 exports.create = (req, res) => {

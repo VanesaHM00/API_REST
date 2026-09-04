@@ -1,4 +1,4 @@
-const Genero = require('../models/genero.model.js');
+const Genero = require('../app/models/genero.model.js');
 
 // Crear un genero
 exports.create = (req, res) => {

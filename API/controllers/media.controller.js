@@ -1,4 +1,4 @@
-const Media = require('../models/media.model.js');
+const Media = require('../app/models/media.model.js');
 
 // Crear una media (pelicula o serie)
 exports.create = (req, res) => {

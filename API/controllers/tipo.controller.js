@@ -1,4 +1,4 @@
-const Tipo = require('../models/tipo.model.js');
+const Tipo = require('../app/models/tipo.model.js');
 
 // Crear un tipo
 exports.create = (req, res) => {
