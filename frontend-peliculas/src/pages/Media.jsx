@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { obtenerMedias, crearMedia, actualizarMedia, eliminarMedia } from '../services/mediaService';
-
 import { obtenerGeneros } from '../services/generoService';
 import { obtenerDirectores } from '../services/directorService';
 import { obtenerProductoras } from '../services/productoraService';
@@ -62,6 +61,22 @@ function Media() {
     setProductora('');
     setTipo('');
     setEditandoId(null);
+  };
+
+  // Convierte el archivo seleccionado a base64
+  const handleImagenChange = (e) => {
+    const archivo = e.target.files[0];
+    if (archivo) {
+      if (!archivo.type.startsWith('image/')) {
+        Swal.fire('Error', 'Seleccione un archivo de imagen válido', 'error');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagen(reader.result);
+      };
+      reader.readAsDataURL(archivo);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -137,7 +152,6 @@ function Media() {
 
       <form onSubmit={handleSubmit} className="mb-4">
         <div className="row g-2">
-          {/* Input para el Serial exigido por la API */}
           <div className="col-md-4">
             <input
               type="text"
@@ -160,7 +174,6 @@ function Media() {
             />
           </div>
 
-          {/* Input para la URL de la película (urlPelicula) */}
           <div className="col-md-4">
             <input
               type="text"
@@ -172,13 +185,14 @@ function Media() {
             />
           </div>
 
+          {/* Input de archivo para la imagen de portada */}
           <div className="col-md-4">
+            <label className="form-label text-white mb-1">Imagen de portada</label>
             <input
-              type="text"
+              type="file"
               className="form-control"
-              placeholder="Imagen o foto de portada"
-              value={imagen}
-              onChange={(e) => setImagen(e.target.value)}
+              accept="image/*"
+              onChange={handleImagenChange}
             />
           </div>
           <div className="col-md-4">
@@ -281,11 +295,11 @@ function Media() {
               <td className="text-white">{m.serial}</td>
               <td className="text-white">{m.titulo}</td>
               <td className="text-white">
-              {m.urlPelicula ? (
-                <a href={m.urlPelicula} target="_blank" rel="noopener noreferrer" className="text-info">
-                  Ver enlace
-                </a>
-              ): "Sin URL"}
+                {m.urlPelicula ? (
+                  <a href={m.urlPelicula} target="_blank" rel="noopener noreferrer" className="text-info">
+                    Ver enlace
+                  </a>
+                ) : "Sin URL"}
               </td>
               <td className="text-white">
                 {m.imagenPortada ? (
@@ -297,8 +311,7 @@ function Media() {
               <td className="text-white">{m.directorId?.nombres}</td>
               <td className="text-white">{m.productoraId?.nombre}</td>
               <td className="text-white">{m.tipoId?.nombre}</td>
-
-              <td className="text-white" style={{maxWidth: "200px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis"}} title={m.sinopsis}>
+              <td className="text-white" style={{ maxWidth: "200px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }} title={m.sinopsis}>
                 {m.sinopsis}
               </td>
               <td>
@@ -316,4 +329,5 @@ function Media() {
     </div>
   );
 }
+
 export default Media;
