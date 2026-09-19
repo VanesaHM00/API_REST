@@ -4,22 +4,25 @@ const bodyParser = require('body-parser');
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.json());
-var port = process.env.PORT || 3000;
 
+
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+
+var port = process.env.PORT || 3000;
 
 const dbConfig = require("./config/database.config.js");
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
-//Agregar las rutas
+// Agregar las rutas
 require('./routes/director.routes.js')(app);
 require('./routes/genero.routes.js')(app);
 require('./routes/productora.routes.js')(app);
 require('./routes/tipo.routes.js')(app);
 require('./routes/media.routes.js')(app);
-//Iniciar la conexión a la base de datos
+
+// Iniciar la conexión a la base de datos
 mongoose.connect(dbConfig.url).then(() => {
     console.log("Conexión a la base de datos exitosa");
 }).catch(err => {
@@ -27,7 +30,7 @@ mongoose.connect(dbConfig.url).then(() => {
     process.exit();
 });
 
+
 app.listen(port, () => {
     console.log(`Servidor corriendo en el puerto ${port}`);
 });
-

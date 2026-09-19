@@ -5,7 +5,7 @@ import Director from './pages/Director';
 import Productora from './pages/Productora';
 import Tipo from './pages/Tipo';
 import Media from './pages/Media';
-import './App.css'; // 👈 Se cargan los estilos del menú y componentes aquí
+import './App.css'; //  Se cargan los estilos del menú y componentes aquí
 
 function App() {
   return (
